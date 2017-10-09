@@ -1,0 +1,70 @@
+CKAN Documents
+    http://docs.ckan.org/en/latest/api/index.html#action-api-reference
+
+Creating a sysadmin user/ Authorizing existing user
+    http://docs.ckan.org/en/latest/maintaining/getting-started.html#create-admin-user
+
+CKAN API Clients - https://github.com/ckan/ckan/wiki/CKAN-API-Clients
+    Installation
+        $ pip install ckanapi
+    Python Module Usage
+        All actions in the CKAN Action API and actions added by CKAN plugins are supported by action shortcuts.
+            CKAN Action API: http://docs.ckan.org/en/latest/api/index.html#action-api-reference
+            Example - Resource Upload:
+
+                    According to CKAN Action API Documents - http://docs.ckan.org/en/latest/api/index.html#ckan.logic.action.create.resource_create
+                    The API function is:
+                        ckan.logic.action.create.resource_create(context, data_dict)
+
+                    Python Module Usage:
+                        from ckanapi import RemoteCKAN
+                        ua = 'ckanapiexample/1.0 (+http://example.com/my/website)'
+                        mysite = RemoteCKAN('http://myckan.example.com', apikey='real-key', user_agent=ua)
+                        mysite.action.resource_create(
+                            package_id='my-dataset-with-files',
+                            url='dummy-value',  # ignored but required by CKAN<2.6
+                            upload=open('/path/to/file/to/upload.csv', 'rb'))
+
+                    Note: When accessing the interface using Python module, be sure to skip the "create"(or "get"/"update"/"patch"/"delete") field, just access functions from the "action" package directly.
+
+
+######################
+
+create data set
+get data set
+delete data set
+
+upload resource
+modify resource
+delete resource
+
+filter stuff
+模糊搜索
+
+
+####################
+
+
+everything has an id: group/organization/tags/...
+not necessarily visible but can be get by name
+
+
+classification
+Tags: http://docs.ckan.org/en/ckan-2.7.0/maintaining/tag-vocabularies.html
+
+
+ckan.logic.action.get
+list - the list of...
+show - show details
+autocomplete - return result starting with the given word
+search - fuzzy search eg. q="Beijing",fq="groups:test_group"
+
+
+ckan.logic.action.creation
+
+
+ckan.logic.action.update
+
+ckan.logic.action.patch
+
+ckan.logic.action.delete

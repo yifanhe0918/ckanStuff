@@ -1,0 +1,41 @@
+bjdata.gov.cn
+
+list of code
+    each code corresponds to a dataset
+        dataset name: bjdata0000
+    grab and upload
+        check existence > already exists/ sucessfully upload
+        add infos
+    delete
+check update
+    input: date
+    return a list of code > get dataset > delete all resource/ keep old and upload new ones
+
+if exist
+    check update
+        number matches, file matches, date matches -> done
+        number matches, file matches, date does not match -> update file
+        any other difference -> delete all then reupload
+if does not exist
+    upload
+
+weather
+
+list of city
+
+
+
+
+air quality
+each city correspond to one dataset
+
+list of city
+    date
+    cityname
+    timelapse
+    total time
+write in local file
+    count down, while true > get data/ print error
+    file name: city/date
+    time:data
+upload to ckan
