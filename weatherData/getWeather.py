@@ -108,5 +108,5 @@ class cityInfo(object):
             self.paramsUpdate(weatherDict)                
 
 
-test = cityInfo(countryName="uk",cityName="london")
-test.update()
+# test = cityInfo(countryName="uk",cityName="london")
+# test.update()

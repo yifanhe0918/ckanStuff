@@ -1,0 +1,1 @@
+execfile('ImportFromBjDataToCkan.py')

@@ -1,8 +1,6 @@
 import ckanapi
 
-ua = 'testUa'
-
-myCkan = ckanapi.RemoteCKAN('http://192.168.12.207:8020', apikey='d8fc8202-2f29-45fd-8fe6-0c63283dcd27', user_agent=ua)
+myCkan = ckanapi.RemoteCKAN('http://192.168.12.207:8020', apikey='d8fc8202-2f29-45fd-8fe6-0c63283dcd27')
 #
 #### Create dataset
 # createDataset = myCkan.action.package_create(
@@ -16,13 +14,13 @@ myCkan = ckanapi.RemoteCKAN('http://192.168.12.207:8020', apikey='d8fc8202-2f29-
 
 
 # Get dataset
-result = myCkan.action.package_show(id="dataset_name333")
-id = result['id']
-# print result
-resource = result['resources']
-for i in resource:
-    print i
-print resource[0]['id']
+# result = myCkan.action.package_show(id="dataset_name333")
+# id = result['id']
+# # print result
+# resource = result['resources']
+# for i in resource:
+#     print i
+# print resource[0]['id']
 
 
 ## Get resource
@@ -55,6 +53,9 @@ print resource[0]['id']
 # print myCkan.action.license_list()[0]
 # print myCkan.action.license_list()[4]
 # print len(myCkan.action.license_list())
+
+### Get user
+result = myCkan.action.user_show(id='yifanhe0918',include_datasets=True)
 
 #####Update dataset's info
 # updatePackage = myCkan.action.package_patch(

@@ -34,6 +34,7 @@ class BjDataPackage():
         sourceListRaw = re.findall('<td>(.*?)</tr>\r\n\t', entry[0],re.S)
         self.fileNum = len(sourceListRaw)+1
         self.fileList = []
+        print 'Content:'
         for i in sourceListRaw:
             # print i
             infos = i.split('</td>')
@@ -48,7 +49,7 @@ class BjDataPackage():
             myPage2 = myResponse2.read()
             result = json.loads(myPage2)["result"]
             self.url = result["address"]
-            print name,format,date,downloadId,url
+            print '         '+name,format,date,downloadId,url
             dataFile = BjDataFile(name,format,date,downloadId,url)
             self.fileList.append(dataFile)
         self.title = self.fileList[0].name

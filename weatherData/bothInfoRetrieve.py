@@ -1,5 +1,5 @@
-import getWeather
 import getAQI
+import getWeather
 
 def getPayload(w, a):
     payload = ''
@@ -7,7 +7,6 @@ def getPayload(w, a):
     payload = payload+',co|'+w.country+',tem|'+str(w.temperature)+',hum|'+str(w.humidity)
     payload = payload+',pre|'+str(w.pressure)+',wsp|'+str(w.wind_speed)+',wdg|'
     payload = payload+str(w.wind_deg)+',srs|'+w.sunrise+',sst|'+w.sunset+',aqi|'
-    print a.sources[0]
     sourceEng = a.sources[0]
     payload = payload+str(a.aqi)+',src|'+sourceEng
     payload = payload+',dmp|'+a.dominentPol+',p25|'+str(a.aqiDetail['pm25']['v'])
@@ -17,13 +16,12 @@ def getPayload(w, a):
     return payload
 
 
-
-country_name="cn"
-city_name="beijing"
-
-cityWeather = getWeather.cityInfo(countryName=country_name,cityName=city_name)
-cityAQI = getAQI.cityAQI(city=city_name)
-cityWeather.update()
-cityAQI.update()
-message = getPayload(cityWeather, cityAQI)
-print message
+def retrieveInfo(country,city):
+    country_name = country
+    city_name = city
+    cityWeather = getWeather.cityInfo(countryName=country_name, cityName=city_name)
+    cityAQI = getAQI.cityAQI(city=city_name)
+    cityWeather.update()
+    cityAQI.update()
+    message = getPayload(cityWeather, cityAQI)
+    return message

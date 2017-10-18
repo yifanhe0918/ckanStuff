@@ -1,20 +1,30 @@
-import BjDataObjects
+import ConfigParser
+
 import ckanapi
 
-fileName = '/Users/YifanHe/Desktop/toImport.txt'
+import BjDataObjects
 
-ua = 'testUa'
-myCkan = ckanapi.RemoteCKAN('http://192.168.12.207:8020', apikey='d8fc8202-2f29-45fd-8fe6-0c63283dcd27', user_agent=ua)
+config = ConfigParser.RawConfigParser()
+config.read('config.ini')
+
+fileName = config.get('Section1', 'filename')
+server = config.get('Section1', 'server')
+apiKey = config.get('Section1','apikey')
+
+myCkan = ckanapi.RemoteCKAN(server, apikey=apiKey)
+
+
 
 with open(fileName) as f:
     content = f.readlines()
     for i in content:
         htmlId = i.split(',')[0]
         BjDataPackage = BjDataObjects.BjDataPackage(htmlId)
-        BjDataPackage.updateFiles()
-
         name = 'bjdata' + str(htmlId)
         print 'Dataset Name:' + name
+        BjDataPackage.updateFiles()
+        print  ' '
+
         try:
             result = myCkan.action.package_show(id=name)
             print "Dataset already exists. Checking Updates... "
@@ -29,10 +39,11 @@ with open(fileName) as f:
                                                   name = j.name + '.'+j.format,
                                                   description="last update: " + j.date,
                                                   format=j.format)
-                print "Succeeded!"
-                print result
-            except:
-                print "Failed to update. Please check manually."
+                print "Succeeded! Dataset info:"
+                print '         '+str(result)
+            except Exception as e:
+                print "Failed to update. Please check manually: "+str(e)
+
 
         except ckanapi.errors.NotFound:
             print "Does not Exist. Creating a new dataset... "
@@ -45,7 +56,10 @@ with open(fileName) as f:
                                                   name = j.name +'.'+ j.format,
                                                   description="last update: " + j.date,
                                                   format=j.format)
-                print "Succeeded!"
-                print result
-            except:
-                print "Failed to create. Please check manually."
+                print "Succeeded! Dataset info"
+                print '         '+str(result)
+            except Exception as e:
+                print "Failed to create. Please check manually: " + str(e)
+        print '   '
+        print '-----------------------------'
+        print '   '

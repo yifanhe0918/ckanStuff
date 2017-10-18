@@ -53,5 +53,5 @@ class cityAQI(object):
 
 
 
-test = cityAQI('beijing')
-test.update()
+# test = cityAQI('beijing')
+# test.update()
